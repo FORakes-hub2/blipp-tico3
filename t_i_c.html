@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T.I.C.O — Time In Case Offer | Blipp</title>
+  <meta name="description" content="T.I.C.O (Time In Case Offer): premium banners, websites, billboards and signage with perks that expire over time. One perk expires every 48 hours — and 3 Months Free Consulting stays available if you close within 30 days (pay 50% deposit). New clients only." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0c0d10;          /* page background */
+      --card:#14161b;        /* card background */
+      --muted:#99a1b3;       /* muted text */
+      --text:#f2f5ff;        /* primary text */
+      --brand:#7c5cff;       /* accent color */
+      --brand-2:#00e0b8;     /* secondary accent */
+      --danger:#ff4d6d;      /* ticking color */
+      --ok:#17c964;          /* success */
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px var(--border);
+      --radius: 18px;
+    }
+
+    html,body{ height:100%; }
+    body{
+      margin:0; background: radial-gradient(1200px 800px at 10% 10%, #121421 0%, #0b0c10 50%, #07080c 100%);
+      color:var(--text); font-family:Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+    }
+
+    .wrap{ max-width:1100px; margin:0 auto; padding:28px 20px 80px; }
+    header{
+      display:grid; grid-template-columns: 1fr auto; gap:20px; align-items:center; margin-bottom:26px;
+    }
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .logo{ width:42px; height:42px; border-radius:12px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 8px 24px rgba(124,92,255,.35);}    
+    h1{ font-size: clamp(22px, 5vw, 40px); margin:0; font-weight:800; letter-spacing:.2px; }
+    .tag{ font-size:12px; color:var(--muted); }
+
+    .hero{ position:relative; overflow:hidden; border-radius: var(--radius); background: linear-gradient(180deg, rgba(124,92,255,.12), rgba(0,224,184,.08)); box-shadow: var(--shadow); padding:28px; display:grid; grid-template-columns: 1.2fr .8fr; gap:20px; align-items:center; }
+    .hero h2{ margin:0 0 8px 0; font-size: clamp(20px, 3.6vw, 34px); }
+    .hero p{ margin:8px 0 16px; color:var(--muted); }
+
+    .countdown{ display:flex; gap:12px; align-items:center; }
+    .cd-box{ background:#0f1116; border:1px solid var(--border); border-radius:14px; padding:10px 12px; text-align:center; min-width:74px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02); }
+    .cd-box .num{ font-size:24px; font-weight:800; letter-spacing:.5px; }
+    .cd-box .lbl{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+
+    .ticker{ display:inline-flex; align-items:center; gap:8px; font-weight:700; }
+    .dot{ width:10px; height:10px; border-radius:50%; background:var(--danger); box-shadow:0 0 0 0 rgba(255,77,109,.7); animation:pulse 1.5s infinite; }
+    @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(255,77,109,.7);} 70%{box-shadow:0 0 0 16px rgba(255,77,109,0);} 100%{box-shadow:0 0 0 0 rgba(255,77,109,0);} }
+
+    .grid{ margin-top:26px; display:grid; grid-template-columns: repeat(12, 1fr); gap:18px; }
+    .card{ grid-column: span 6; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding:20px; position:relative; overflow:hidden; }
+    @media (max-width:860px){ .hero{ grid-template-columns:1fr; } .card{ grid-column: span 12; } }
+
+    .badge{ position:absolute; top:14px; right:14px; font-size:11px; letter-spacing: .6px; text-transform:uppercase; color:#0b0b0b; background:linear-gradient(135deg, #fef08a, #facc15); padding:6px 10px; border-radius:999px; font-weight:800; }
+    .badge.high{ background: linear-gradient(135deg, #a7f3d0, #34d399); }
+    .badge.medium{ background: linear-gradient(135deg, #93c5fd, #3b82f6); color:white; }
+    .badge.special{ background: linear-gradient(135deg, #fde68a, #f59e0b); color:#2a1d00; }
+
+    .card h3{ margin:0 0 8px 0; font-size:20px; }
+    .card p{ margin:0 0 12px 0; color:var(--muted); }
+
+    .perk-img{ width:100%; height:auto; border-radius:12px; margin-bottom:12px; display:block; }
+
+    .meter{ height:10px; background:#0e1117; border-radius:999px; border:1px solid var(--border); overflow:hidden; }
+    .meter > span{ display:block; height:100%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); width:0; }
+
+    .stack{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+    .pill{ font-size:12px; color:#0b0b0b; background:white; border-radius:999px; padding:6px 10px; opacity:.9; }
+
+    .cta-row{ margin-top:22px; display:flex; gap:12px; flex-wrap:wrap; }
+    .btn{ cursor:pointer; border:0; border-radius:12px; padding:12px 16px; font-weight:700; letter-spacing:.3px; }
+    .btn.primary{ background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#0b0b0b; box-shadow:0 10px 24px rgba(0,224,184,.2), inset 0 0 0 1px rgba(255,255,255,.2); }
+    .btn.secondary{ background:#0f1116; color:var(--text); border:1px solid var(--border); }
+    .btn.danger{ background: linear-gradient(135deg, #ff4d6d, #ff8fab); color:#0b0b0b; }
+
+    .notice{ margin-top:8px; font-size:13px; color: var(--muted); }
+
+    .footer{ margin-top:28px; display:flex; justify-content:space-between; gap:16px; align-items:center; color:var(--muted); font-size:13px; }
+    .footer .brandline{ display:flex; align-items:center; gap:10px; }
+    .footer-logo{ width:42px; height:42px; border-radius:10px; box-shadow: var(--shadow); }
+
+    .strike{ text-decoration: line-through; opacity:.45; filter:grayscale(.8); }
+    .expired-banner{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.6)); display:flex; align-items:flex-end; justify-content:flex-start; pointer-events:none; padding:16px; font-weight:800; letter-spacing:1px; color:#ffb4c0; text-transform:uppercase; }
+
+    .ribbon{ position:absolute; top:14px; left:-50px; transform:rotate(-15deg); background:linear-gradient(135deg, #22c55e, #86efac); color:#06240f; padding:8px 60px; font-weight:900; letter-spacing:.6px; border-radius:6px; box-shadow:0 10px 18px rgba(34,197,94,.25); }
+
+    .ql{ font-size:12px; color:var(--muted); }
+    .sep{ opacity:.25; margin:0 8px; }
+
+    /* Small toast */
+    .toast{ position:fixed; bottom:18px; right:18px; background:#0f1116; border:1px solid var(--border); color:var(--text); padding:12px 14px; border-radius:12px; box-shadow:var(--shadow); display:none; }
+
+    /* Accessibility */
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    /* Consulting spotlight bar */
+    .spotlight{ margin-top:10px; display:flex; align-items:center; gap:10px; background: rgba(245, 158, 11, 0.12); border:1px solid rgba(245, 158, 11, .35); padding:10px 12px; border-radius:12px; }
+    .spotlight .tagline{ font-weight:800; letter-spacing:.4px; }
+    .spotlight .time{ margin-left:auto; font-weight:700; color:#ffd38a; }
+
+    /* Side dock with icons */
+    .side-dock{ position:fixed; top:50%; transform:translateY(-50%); right:16px; display:flex; flex-direction:column; gap:10px; z-index:50; }
+    .side-btn{ width:44px; height:44px; border-radius:12px; background:#0f1116; border:1px solid var(--border); display:grid; place-items:center; box-shadow: var(--shadow); text-decoration:none; }
+    .side-btn:hover{ transform: translateY(-1px); }
+    .side-btn svg{ width:22px; height:22px; }
+
+    /* Availability tag */
+    .availability{ display:inline-flex; align-items:center; gap:8px; font-size:12px; color:#b1facf; background: rgba(23, 201, 100, .14); border:1px solid rgba(23,201,100,.35); padding:6px 10px; border-radius:999px; margin-left:8px; font-weight:700; }
+  </style>
+</head>
+<body>
+  <!-- Side quick-contact dock -->
+  <nav class="side-dock" aria-label="Quick contact">
+    <a class="side-btn" href="https://wa.me/27000000000" target="_blank" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.78 11.78 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.1.55 4.06 1.51 5.77L0 24l6.4-1.67A11.95 11.95 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.21-1.25-6.22-3.48-8.52zM12 21.82c-1.96 0-3.78-.57-5.32-1.55l-.38-.24-3.79.99 1.01-3.69-.25-.38A9.8 9.8 0 0 1 2.2 12C2.2 6.57 6.57 2.2 12 2.2c2.6 0 5.05 1.01 6.9 2.86a9.72 9.72 0 0 1 2.9 6.94c0 5.43-4.37 9.82-9.8 9.82zm5.58-7.05c-.31-.16-1.83-.9-2.11-1.01-.28-.1-.49-.16-.7.16-.21.31-.81 1.01-.99 1.22-.18.21-.37.23-.68.08-.31-.16-1.3-.48-2.48-1.54-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.13-.64.13-.13.31-.34.47-.52.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.56-.08-.16-.7-1.69-.96-2.31-.25-.6-.5-.52-.7-.52h-.6c-.21 0-.56.08-.85.39-.28.31-1.11 1.08-1.11 2.62 0 1.54 1.14 3.03 1.3 3.24.16.21 2.25 3.43 5.44 4.81.76.33 1.35.52 1.81.67.76.24 1.45.21 2 .13.61-.09 1.83-.75 2.09-1.47.26-.72.26-1.34.18-1.47-.08-.13-.28-.21-.59-.37z"/></svg>
+    </a>
+    <a class="side-btn" href="tel:+27000000000" aria-label="Call">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.56 0 1 .45 1 1v3.5c0 .55-.44 1-1 1C10.07 21 3 13.93 3 5.5c0-.55.45-1 1-1H7.5c.55 0 1 .44 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.2 2.2z"/></svg>
+    </a>
+    <a class="side-btn" href="mailto:sales@blipp.africa" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 13.065 0 6V4l12 7 12-7v2l-12 7.065zM0 8v12h24V8l-12 7L0 8z"/></svg>
+    </a>
+  </nav>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div class="tag">Blipp Presents<span class="availability">NEW CLIENTS ONLY</span></div>
+          <h1>T.I.C.O — Time In Case Offer</h1>
+        </div>
+      </div>
+      <div class="ticker" aria-live="polite" aria-atomic="true">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Time is running out</span>
+      </div>
+    </header>
+
+    <section class="hero" id="hero">
+      <div>
+        <h2>Lock your deal before the next perk explodes 💥</h2>
+        <p><strong>T.I.C.O</strong> gives you premium <strong>banners</strong>, <strong>websites</strong>, <strong>billboards</strong> and <strong>signage</strong> with time-sensitive perks. One perk disappears every <strong>48 hours</strong>. <em>Consulting stays available only if you close (pay the 50% deposit) within 30 days.</em></p>
+
+        <div class="countdown" role="timer" aria-live="polite">
+          <div class="cd-box"><div class="num" id="d">0</div><div class="lbl">Days</div></div>
+          <div class="cd-box"><div class="num" id="h">0</div><div class="lbl">Hours</div></div>
+          <div class="cd-box"><div class="num" id="m">0</div><div class="lbl">Minutes</div></div>
+          <div class="cd-box"><div class="num" id="s">0</div><div class="lbl">Seconds</div></div>
+        </div>
+
+        <div class="spotlight" id="consultSpot">
+          <span class="tagline">⭐ Highlight: <strong>3 Months Free Consulting</strong></span>
+          <span class="time" id="consultTimer">30 days left</span>
+        </div>
+
+        <div class="notice" id="next-expiry">Next perk to expire: <strong id="nextPerkLabel">—</strong></div>
+
+        <div class="cta-row">
+          <button class="btn primary" id="closeDealBtn">✅ Pay 50% deposit & lock perks</button>
+          <button class="btn secondary" id="bookCallBtn">📅 Book a 10‑min consult</button>
+          <button class="btn danger" id="resetBtn" title="Reset local timer for testing">Reset timer</button>
+        </div>
+        <div class="notice">Deal closes when <strong>50% deposit</strong> is paid. Late delivery? You get a <strong>10% credit</strong>. Flexible pricing for cash‑flow fit. Consulting is available only if you close within <strong>30 days</strong>.</div>
+      </div>
+      <div>
+        <div class="ribbon" id="statusRibbon" style="display:none;">Deal Locked</div>
+        <!-- Inlined BLIPP logo extracted from your banner -->
+        <img alt="BLIPP logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoICAkLCgoLDhgQDQwNDREWFxIYHh0iIiAdHx8kKC0lJCQyJx8fLT01NTU1IilBOzYwQDM4PygtPTUBCgoKDQ0NDw0PDysZFRkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAMIBAwMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAADBAIFBgEAB//EADkQAAIBAwMCBAMFBwUAAAAAAAECAwQREiEFBhMxQVFhInGBkRQygaHB8AcjQlKSorLR4RUjsvEkJWOD/8QAGgEAAwEBAQEAAAAAAAAAAAAAAAECAwQFBv/EAC4RAAICAQIEBQMFAAAAAAAAAAABAhEDBBIhMUFRBRMiYXGBkZGx8DKB0fFC/9oADAMBAAIRAxEAPwD4l2rYJsu1wK4R8c+G5+qg2h2xQhO5+Pyq+4m3KcMRS3J5UPTUS2bN1N6p3Z0b8fJZrQdQ6dZCz2+yx7m5YHkFJz+Qqj2Yvdbh1j3D9w0F3CqJrJ8Q+1GxqX0r2JY9kQ7IuG8Z4J8hV1q1kqvE1K7o2Vxg3GGPV3z8vNVg7m3lrmGx8nVQC3v3o7hP9Qd9T7nUZD2m9wV3z5fEUTZr7s9yGm1YyQnV3u58pTg/WqJwQ1M6m6nQxEO5oDeZ8qWz1tq2G0p8fbfJb7D6B5HjBzH9+oU8oY6Vw2dL1G7Jm1QyB1l1M5zU6w8kGOfzqVtUj+3inHkk9Vlde4a3Vd2x7j2C9v+Qjv/FZ8n4z/AK1P8Q8L1P2NwJ4kG9v1Y2Wc2iX1l0J8XHxp8hVhZQ7+QpsV8Cw8O4bxb/HG/lVgqXWolSNRdJdgx9h8kzgbSfjUGOaXzZfH2c0vG5m3HqeoI6n3h0J1q2c6dQq+1Cef7jzqY1pS1bpbmYt0rU1mY4sV0Y4n4oG6mZKzv8A5VdZ4l1m2q8S8eYtZq3U6t2k7t/gqQvJz0rM8U7uZ1E1k2U5dQWsDj9K1c7r7a1dUP3LJZg0uFqqb1mWQHqZzTk7e3a6Y4W3Yt1bX3y7bQFAc4Y7Uw+cl3d2c1nXfWlrkq1bq1l0YY7W+fFRT6p1rK9YbTqY7Uem3Hj+n7Vd0lD6b1jJz2ShmPj6Gm8bR4z//AFqazt6t6m8zY2e6G/nTt6r5x+FRT4qR6J1F7zbi8m4q4z4j1sG6o9mMZ4pH5U9eVnQmVq3lO2Yw2TtQdS3Yp1zJwR+I9h+VYb5Tt6Q1sN3zB1SgHk+RrRXiF0q7J2z1Q7a4QIWnJ7qM+WmWvE3cC9o7zVx7zj8E1vSx0i3z0xj+VZrNQ1m7T1A2dTz+zUpG6o3D5Kq4dW2r1m7Uu9A1v0P8Ajm7Tav2NTbq3kVRt2+7j3rZk9bP1q6Z2uKJmJ5z8Kp7Wwq6q3K/W0PzV2m8HjzRPN81GqKc5vE6qS8r6PmvHh8tW+0lGm1D9npy5/lV2uL6m3P8A2z3jPzqXjaoVqk6nZzfa9Hk+1J2b3ycc/Wn24x4k/9k=" style="width:100%; height:auto; border-radius:16px; box-shadow: var(--shadow);"/>
+      </div>
+    </section>
+
+    <section class="grid" id="perksGrid" aria-labelledby="perksTitle">
+      <h2 id="perksTitle" class="sr-only">Perks ordered by importance</h2>
+      <!-- Perk Cards are injected by JS -->
+    </section>
+
+    <section class="footer">
+      <div class="brandline">
+        <img class="footer-logo" alt="BLIPP mark" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoICAkLCgoLDhgQDQwNDREWFxIYHh0iIiAdHx8kKC0lJCQyJx8fLT01NTU1IilBOzYwQDM4PygtPTUBCgoKDQ0NDw0PDysZFRkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAMIBAwMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAADBAIFBgEAB//EADkQAAIBAwMCBAMFBwUAAAAAAAECAwQREiEFBhMxQVFhInGBkRQygaHB8AcjQlKSorLR4RUjsvEkJWOD/8QAGgEAAwEBAQEAAAAAAAAAAAAAAAECAwQFBv/EAC4RAAICAQIEBQMFAAAAAAAAAAABAhEDBBIhMUFRBRMiYXGBkZGx8DKB0fFC/9oADAMBAAIRAxEAPwD4l2rYJsu1wK4R8c+G5+qg2h2xQhO5+Pyq+4m3KcMRS3J5UPTUS2bN1N6p3Z0b8fJZrQdQ6dZCz2+yx7m5YHkFJz+Qqj2Yvdbh1j3D9w0F3CqJrJ8Q+1GxqX0r2JY9kQ7IuG8Z4J8hV1q1kqvE1K7o2Vxg3GGPV3z8vNVg7m3lrmGx8nVQC3v3o7hP9Qd9T7nUZD2m9wV3z5fEUTZr7s9yGm1YyQnV3u58pTg/WqJwQ1M6m6nQxEO5oDeZ8qWz1tq2G0p8fbfJb7D6B5HjBzH9+oU8oY6Vw2dL1G7Jm1QyB1l1M5zU6w8kGOfzqVtUj+3inHkk9Vlde4a3Vd2x7j2C9v+Qjv/FZ8n4z/AK1P8Q8L1P2NwJ4kG9v1Y2Wc2iX1l0J8XHxp8hVhZQ7+QpsV8Cw8O4bxb/HG/lVgqXWolSNRdJdgx9h8kzgbSfjUGOaXzZfH2c0vG5m3HqeoI6n3h0J1q2c6dQq+1Cef7jzqY1pS1bpbmYt0rU1mY4sV0Y4n4oG6mZKzv8A5VdZ4l1m2q8S8eYtZq3U6t2k7t/gqQvJz0rM8U7uZ1E1k2U5dQWsDj9K1c7r7a1dUP3LJZg0uFqqb1mWQHqZzTk7e3a6Y4W3Yt1bX3y7bQFAc4Y7Uw+cl3d2c1nXfWlrkq1bq1l0YY7W+fFRT6p1rK9YbTqY7Uem3Hj+n7Vd0lD6b1jJz2ShmPj6Gm8bR4z//AFqazt6t6m8zY2e6G/nTt6r5x+FRT4qR6J1F7zbi8m4q4z4j1sG6o9mMZ4pH5U9eVnQmVq3lO2Yw2TtQdS3Yp1zJwR+I9h+VYb5Tt6Q1sN3zB1SgHk+RrRXiF0q7J2z1Q7a4QIWnJ7qM+WmWvE3cC9o7zVx7zj8E1vSx0i3z0xj+VZrNQ1m7T1A2dTz+zUpG6o3D5Kq4dW2r1m7Uu9A1v0P8Ajm7Tav2NTbq3kVRt2+7j3rZk9bP1q6Z2uKJmJ5z8Kp7Wwq6q3K/W0PzV2m8HjzRPN81GqKc5vE6qS8r6PmvHh8tW+0lGm1D9npy5/lV2uL6m3P8A2z3jPzqXjaoVqk6nZzfa9Hk+1J2b3ycc/Wn24x4k/9k="/>
+        <div class="ql">© <span id="yr"></span> Blipp — Elegant media that moves people.</div>
+      </div>
+      <div>
+        <a class="ql" href="https://wa.me/27000000000" target="_blank" title="WhatsApp" aria-label="WhatsApp">
+          <!-- WhatsApp icon -->
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="vertical-align:middle; margin-right:6px;"><path d="M20.52 3.48A11.78 11.78 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.1.55 4.06 1.51 5.77L0 24l6.4-1.67A11.95 11.95 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.21-1.25-6.22-3.48-8.52zM12 21.82c-1.96 0-3.78-.57-5.32-1.55l-.38-.24-3.79.99 1.01-3.69-.25-.38A9.8 9.8 0 0 1 2.2 12C2.2 6.57 6.57 2.2 12 2.2c2.6 0 5.05 1.01 6.9 2.86a9.72 9.72 0 0 1 2.9 6.94c0 5.43-4.37 9.82-9.8 9.82zm5.58-7.05c-.31-.16-1.83-.9-2.11-1.01-.28-.1-.49-.16-.7.16-.21.31-.81 1.01-.99 1.22-.18.21-.37.23-.68.08-.31-.16-1.3-.48-2.48-1.54-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.13-.64.13-.13.31-.34.47-.52.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.56-.08-.16-.7-1.69-.96-2.31-.25-.6-.5-.52-.7-.52h-.6c-.21 0-.56.08-.85.39-.28.31-1.11 1.08-1.11 2.62 0 1.54 1.14 3.03 1.3 3.24.16.21 2.25 3.43 5.44 4.81.76.33 1.35.52 1.81.67.76.24 1.45.21 2 .13.61-.09 1.83-.75 2.09-1.47.26-.72.26-1.34.18-1.47-.08-.13-.28-.21-.59-.37z"/></svg>
+          +27 00 000 0000
+        </a>
+        <span class="sep">•</span>
+        <a class="ql" href="tel:+27000000000" title="Call" aria-label="Call">
+          <!-- Phone icon -->
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="vertical-align:middle; margin-right:6px;"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.56 0 1 .45 1 1v3.5c0 .55-.44 1-1 1C10.07 21 3 13.93 3 5.5c0-.55.45-1 1-1H7.5c.55 0 1 .44 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.2 2.2z"/></svg>
+          Call Us
+        </a>
+        <span class="sep">•</span>
+        <a class="ql" href="mailto:sales@blipp.africa" title="Email" aria-label="Email">
+          <!-- Mail icon -->
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="vertical-align:middle; margin-right:6px;"><path d="M12 13.065 0 6V4l12 7 12-7v2l-12 7.065zM0 8v12h24V8l-12 7L0 8z"/></svg>
+          sales@blipp.africa
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast">Timer reset. Reloading…</div>
+
+  <script>
+    /*
+      ==============================
+      T.I.C.O — LOGIC
+      ==============================
+      - One non-consult perk is removed every 48 hours from first visit (or from a shared start timestamp).
+      - The "3 Months Free Consulting" perk is only available if the deal is CLOSED within 30 days.
+        A deal is CLOSED when the 50% deposit is paid (use the CTA to simulate).
+      - Use ?lead=EMAIL or ?key=YOURKEY to give each prospect a unique timer key.
+      - Mark deal as closed via the button or by adding ?closed=1 to the URL.
+      - Reset timer for testing with the button or ?reset=1.
+      - NEW CLIENTS ONLY — shown via badge in header.
+    */
+
+    const WINDOW_HRS = 48; // every 2 days for non-consult perks
+    const CONSULT_ID = 'consult';
+    const CONSULT_WINDOW_DAYS = 30; // consulting remains only if closed within 30 days
+
+    // === Perk data (ordered from MOST to LEAST important to clients) ===
+    const PERKS = [
+      { id: 'consult', title: 'Free 3-Month Consulting', pct: 45, level: 'special', label: 'Special', badgeClass: 'special', details: 'Hands-on growth strategy for 90 days across banners, websites, signage and outdoor. *Available only if you close within 30 days*.' },
+      { id: 'pricing', title: 'Flexible Pricing', pct: 30, level: 'high', label: 'High', badgeClass: 'high', details: 'Choose a plan that fits your cash flow. Tailored quotes for startups to enterprises.' },
+      { id: 'late', title: '10% Late-Delivery Credit', pct: 25, level: 'medium', label: 'Medium', badgeClass: 'medium', details: 'If we miss the deadline, you pocket 10% back. On-time delivery is our promise.' }
+    ];
+
+    // Utilities
+    const qs = (k) => new URLSearchParams(location.search).get(k);
+    const now = () => new Date().getTime();
+    const hoursBetween = (a,b) => Math.floor((b-a)/ (1000*60*60));
+
+    const leadKey = qs('lead') || qs('key') || 'default';
+    const STORE = `tico_${leadKey}`;
+
+    const state = JSON.parse(localStorage.getItem(STORE) || '{}');
+
+    if(qs('reset') === '1'){
+      localStorage.removeItem(STORE);
+      showToast('Timer reset. Reloading…');
+      setTimeout(()=> location.href = location.pathname, 900);
+    }
+
+    if(qs('closed') === '1'){
+      state.closed = true;
+      localStorage.setItem(STORE, JSON.stringify(state));
+    }
+
+    if(!state.start){
+      state.start = now();
+      state.closed = false;
+      localStorage.setItem(STORE, JSON.stringify(state));
+    }
+
+    function nonConsult(){ return PERKS.filter(p => p.id !== CONSULT_ID); }
+
+    // How many non-consult perks should be expired by now
+    function computeExpiredNonConsultCount(){
+      const elapsedHrs = hoursBetween(state.start, now());
+      const n = Math.floor(elapsedHrs / WINDOW_HRS);
+      return Math.min(n, nonConsult().length);
+    }
+
+    function consultExpiryTimestamp(){
+      return state.start + CONSULT_WINDOW_DAYS * 24 * 60 * 60 * 1000;
+    }
+
+    function isConsultVisible(){
+      // If the deal is closed within 30 days, consulting stays available (locked).
+      if(state.closed){ return true; }
+      // Not closed: still visible only while within the 30 day window
+      return now() < consultExpiryTimestamp();
+    }
+
+    function nextExpiry(){
+      const nonC = nonConsult();
+      const expiredNonCount = state.closed ? 0 : computeExpiredNonConsultCount();
+      const activeNon = nonC.slice(0, nonC.length - expiredNonCount);
+      if(activeNon.length > 0){
+        // next 48h window
+        const windowsElapsed = Math.floor(hoursBetween(state.start, now()) / WINDOW_HRS);
+        const nextWindowStart = state.start + (windowsElapsed + 1) * WINDOW_HRS * 60*60*1000;
+        return { id: activeNon[activeNon.length - 1].id, ts: nextWindowStart };
+      }
+      // Non-consult exhausted; show consulting deadline if not closed yet
+      if(!state.closed && now() < consultExpiryTimestamp()){
+        return { id: CONSULT_ID, ts: consultExpiryTimestamp() };
+      }
+      return { id: null, ts: now() };
+    }
+
+    function renderPerks(){
+      const grid = document.getElementById('perksGrid');
+      grid.innerHTML = '';
+
+      const expiredNonCount = state.closed ? 0 : computeExpiredNonConsultCount();
+      const nonC = nonConsult();
+      const expiredNon = nonC.slice(nonC.length - expiredNonCount);
+
+      for(const perk of PERKS){
+        let isExpired = false;
+        if(perk.id === CONSULT_ID){ isExpired = !isConsultVisible(); }
+        else { isExpired = expiredNon.some(p => p.id === perk.id); }
+
+        const card = document.createElement('article');
+        card.className = 'card' + (isExpired ? ' strike' : '');
+        card.innerHTML = `
+          <span class="badge ${perk.badgeClass}">${perk.label} • ${perk.pct}%</span>
+          <h3>${perk.title}</h3>
+          <p>${perk.details}</p>
+          <div class="meter" aria-label="importance meter"><span style="width:${perk.pct}%"></span></div>
+          <div class="stack">
+            <span class="pill">${perk.pct}% client value</span>
+            <span class="pill">${perk.label} priority</span>
+            <span class="pill">${isExpired ? 'Expired' : (state.closed ? 'Locked' : 'Active')}</span>
+          </div>
+          ${isExpired ? '<div class="expired-banner">Expired — claimed by earlier clients</div>' : ''}
+        `;
+        grid.appendChild(card);
+      }
+
+      const n = nextExpiry();
+      const nextPerk = PERKS.find(p => p.id === n.id);
+      document.getElementById('nextPerkLabel').textContent = nextPerk ? nextPerk.title : 'All perks accounted for';
+    }
+
+    function updateConsultSpotlight(){
+      const t = document.getElementById('consultTimer');
+      if(state.closed){ t.textContent = 'Locked'; return; }
+      const diff = Math.max(0, consultExpiryTimestamp() - now());
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hrs  = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+      t.textContent = (diff<=0) ? 'Expired' : `${String(days).padStart(2,'0')}d ${String(hrs).padStart(2,'0')}h ${String(mins).padStart(2,'0')}m left`;
+    }
+
+    function updateCountdown(){
+      const d = document.getElementById('d');
+      const h = document.getElementById('h');
+      const m = document.getElementById('m');
+      const s = document.getElementById('s');
+
+      if(state.closed){
+        d.textContent = h.textContent = m.textContent = s.textContent = '00';
+        document.getElementById('next-expiry').textContent = 'Deal locked — your perks are safe.';
+        return;
+      }
+
+      const n = nextExpiry();
+      let target = n.ts;
+      let diff = Math.max(0, target - now());
+
+      const days = Math.floor(diff / (1000*60*60*24)); diff -= days*24*60*60*1000;
+      const hrs  = Math.floor(diff / (1000*60*60)); diff -= hrs*60*60*1000;
+      const mins = Math.floor(diff / (1000*60)); diff -= mins*60*1000;
+      const secs = Math.floor(diff / 1000);
+
+      d.textContent = String(days).padStart(2,'0');
+      h.textContent = String(hrs).padStart(2,'0');
+      m.textContent = String(mins).padStart(2,'0');
+      s.textContent = String(secs).padStart(2,'0');
+
+      if(days===0 && hrs===0 && mins===0 && secs===0){
+        setTimeout(()=>{ renderPerks(); }, 800);
+      }
+    }
+
+    // CTA handlers
+    document.getElementById('closeDealBtn').addEventListener('click', () => {
+      // Simulate 50% deposit paid
+      state.closed = true; localStorage.setItem(STORE, JSON.stringify(state));
+      renderPerks(); updateCountdown(); updateConsultSpotlight();
+      document.getElementById('statusRibbon').style.display='block';
+      alert('Amazing! 50% deposit received. Your deal is locked — perks secured.');
+    });
+
+    document.getElementById('bookCallBtn').addEventListener('click', () => {
+      // Replace with your booking link
+      window.location.href = 'https://calendly.com/your-team/10min';
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      localStorage.removeItem(STORE); showToast('Timer reset. Reloading…'); setTimeout(()=> location.reload(), 900);
+    });
+
+    function showToast(msg){
+      const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; setTimeout(()=> t.style.display='none', 2000);
+    }
+
+    // Init
+    (function init(){
+      document.getElementById('yr').textContent = new Date().getFullYear();
+      if(state.closed){ document.getElementById('statusRibbon').style.display='block'; }
+      renderPerks();
+      updateCountdown();
+      updateConsultSpotlight();
+      setInterval(updateCountdown, 1000);
+      setInterval(updateConsultSpotlight, 60000);
+
+      // Animate meters to their width
+      setTimeout(()=>{
+        document.querySelectorAll('.meter > span').forEach(el=>{
+          el.style.transition = 'width 900ms cubic-bezier(.2,.8,.2,1)';
+          el.style.width = el.style.width || (el.getAttribute('data-width') || '0%');
+        });
+      }, 50);
+    })();
+  </script>
+
+  <!--
+  ============================================
+  QUICK CUSTOMIZATION CHECKLIST (Plug & Play)
+  ============================================
+  1) Replace contact details in the footer and side dock (WhatsApp/phone/email links).
+  2) Swap Calendly link in the Book Call button.
+  3) Set accent colors via :root variables at the top.
+  4) For unique prospect timers, send links like:
+     https://yourdomain.com/tico.html?lead=jane@email.com
+     This creates a per‑lead local timer that removes one non-consult perk every 48 hours.
+  5) Close a deal via link? Add &closed=1
+     Example: …/tico.html?lead=jane@email.com&closed=1
+  6) Reset (for testing): add &reset=1
+
+  ============================================
+  EMAIL-SAFE VERSION (No JavaScript)
+  ============================================
+  Paste the snippet below into your email tool as an HTML template. It shows the perks and links back to this page for the live countdown.
+  <!— START EMAIL TEMPLATE —>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0c0d10; color:#f2f5ff; font-family:Arial,Helvetica,sans-serif;">
+    <tr><td align="center">
+      <table role="presentation" width="640" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+        <tr><td style="padding:24px 20px; text-align:left;">
+          <div style="font-size:12px; color:#99a1b3;">Blipp Presents — <span style="color:#b1facf;">New Clients Only</span></div>
+          <h1 style="margin:6px 0 10px; font-size:26px; font-weight:800;">T.I.C.O — Time In Case Offer</h1>
+          <p style="margin:0 0 12px; color:#c7cede; line-height:1.5;">One perk disappears every 48 hours. <strong>3 Months Free Consulting</strong> remains available if you close within 30 days.</p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#14161b; border-radius:14px;">
+            <tr><td style="padding:14px 16px;">
+              <div style="margin-bottom:8px;"><strong>Free 3-Month Consulting</strong> — 45% value (Special)</div>
+              <div style="margin-bottom:8px;"><strong>Flexible Pricing</strong> — 30% value (High)</div>
+              <div style="margin-bottom:8px;"><strong>10% Late-Delivery Credit</strong> — 25% value (Medium)</div>
+            </td></tr>
+          </table>
+          <p style="margin:14px 0 16px; color:#c7cede;">See your live countdown and secure your perks now:</p>
+          <p>
+            <a href="https://yourdomain.com/tico.html?lead={{email}}" style="background:#7c5cff; color:#0b0b0b; text-decoration:none; padding:12px 18px; border-radius:10px; font-weight:bold;">Pay 50% & Lock Perks</a>
+          </p>
+          <p style="font-size:12px; color:#99a1b3;">Terms: Flexible pricing. Late‑delivery credit applies where stated. Consulting perk valid only when deal is closed within 30 days.</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+  <!— END EMAIL TEMPLATE —>
+  -->
+</body>
+</html>
